@@ -264,7 +264,9 @@ fun ByteArray.writeStringBE(str: String, offset: Int = 0, encoding: String = "he
             }
         }
         "ascii" -> {
-            val hex = str.toCharArray().map { it.toInt() }.map { it.toString(16) }.joinToString("")
+            val hex = str.toCharArray().map { it.toInt() }
+                         .map { it.toString(16).padStart(2, '0') }
+                         .joinToString("")
             this.writeStringBE(hex, offset, "hex")
         }
     }
@@ -279,7 +281,9 @@ fun ByteArray.writeStringLE(str: String, offset: Int = 0, encoding: String = "he
             this.writeStringBE(hex, offset, encoding)
         }
         "ascii" -> {
-            val hex = str.toCharArray().map { it.toInt() }.map { it.toString(16) }.joinToString("")
+            val hex = str.toCharArray().map { it.toInt() }
+                         .map { it.toString(16).padStart(2, '0') }
+                         .joinToString("")
             this.writeStringLE(hex, offset, "hex")
         }
     }
